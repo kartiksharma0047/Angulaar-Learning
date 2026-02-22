@@ -5,8 +5,20 @@ import { RouterOutlet } from '@angular/router';
   selector: 'app-root',
   imports: [RouterOutlet],
   templateUrl: './app.html',
-  styleUrl: './app.css'
+  styleUrl: './app.css',
 })
 export class App {
-  protected readonly title = signal('demo');
+  employees: any[] = [
+    { id: 1, name: 'Amit' },
+    { id: 2, name: 'Ankit' },
+    { id: 3, name: 'Raj' },
+    { id: 4, name: 'Rahul' },
+    { id: 5, name: 'Ravi' },
+  ];
+
+  isExist:boolean=true
+
+  CheckStatus(){
+    this.isExist=!this.isExist
+  }
 }
