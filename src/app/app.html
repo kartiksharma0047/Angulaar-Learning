@@ -1,7 +1,57 @@
-<h1>Manager: Kartik is in the building?</h1>
-<button (click)="CheckStatus()">Check Surroundings !</button>
-@if(isExist){
-  <p>You: Yes He exist</p>
-}@else{
-  <p>You: No he left early</p>
-}
+<div>
+  <h1>Customer Form</h1>
+  <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+    <div class="inputParentDivs">
+      First Name :
+      <div>
+        <input formControlName="fname" type="text" name="fname" placeholder="Enter First Name" />
+        @if (getfname()?.hasValidator(Validators.required)) {
+          <span class="requried">*</span>
+        }
+        @if(
+          getfname()?.errors?.['required'] && 
+          (getfname()?.touched || getfname()?.dirty) ){
+          <span class="requried">This field is requried to fill</span>
+        }
+      </div>
+    </div>
+    <div class="inputParentDivs">
+      Last Name :
+      <div>
+        <input formControlName="lname" type="text" name="lname" placeholder="Enter Last Name" />
+        @if (getlname()?.hasValidator(Validators.required)) {
+          <span class="requried">*</span>
+        }
+      </div>
+    </div>
+    <div class="inputParentDivs">
+      Email :
+      <div>
+        <input
+          formControlName="email"
+          type="email"
+          name="email"
+          placeholder="Enter Email Address"
+        />
+        @if (getEmail()?.hasValidator(Validators.required)) {
+          <span class="requried">*</span>
+        }
+      </div>
+    </div>
+    <div class="inputParentDivs">
+      Contact :
+      <div>
+        <input
+          formControlName="contact"
+          type="text"
+          name="contact"
+          placeholder="Enter Contact Number"
+        />
+        @if (getContact()?.hasValidator(Validators.required)) {
+          <span class="requried">*</span>
+        }
+      </div>
+    </div>
+    <button>Register</button>
+  </form>
+</div>
