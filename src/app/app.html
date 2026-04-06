@@ -8,9 +8,7 @@
         @if (getfname()?.hasValidator(Validators.required)) {
           <span class="requried">*</span>
         }
-        @if(
-          getfname()?.errors?.['required'] && 
-          (getfname()?.touched || getfname()?.dirty) ){
+        @if (getfname()?.errors?.['required'] && (getfname()?.touched || getfname()?.dirty)) {
           <span class="requried">This field is requried to fill</span>
         }
       </div>
@@ -21,6 +19,9 @@
         <input formControlName="lname" type="text" name="lname" placeholder="Enter Last Name" />
         @if (getlname()?.hasValidator(Validators.required)) {
           <span class="requried">*</span>
+        }
+        @if (getlname()?.errors?.['required'] && (getlname()?.touched || getlname()?.dirty)) {
+          <span class="requried">This field is requried to fill</span>
         }
       </div>
     </div>
@@ -36,6 +37,12 @@
         @if (getEmail()?.hasValidator(Validators.required)) {
           <span class="requried">*</span>
         }
+        @if (getEmail()?.errors?.['email'] && (getEmail()?.touched || getEmail()?.dirty)) {
+          <span class="requried">Please Enter Correct Email</span>
+        }
+        @if (getEmail()?.errors?.['required'] && (getEmail()?.touched || getEmail()?.dirty)) {
+          <span class="requried">This field is requried to fill</span>
+        }
       </div>
     </div>
     <div class="inputParentDivs">
@@ -50,8 +57,22 @@
         @if (getContact()?.hasValidator(Validators.required)) {
           <span class="requried">*</span>
         }
+        @if (
+          getContact()?.errors?.['minlength'] && (getContact()?.touched || getContact()?.dirty)
+        ) {
+          <span class="requried">Minimum 10 digits required</span>
+        }
+        @if (
+          getContact()?.errors?.['maxlength'] && (getContact()?.touched || getContact()?.dirty)
+        ) {
+          <span class="requried">Maximum 10 digits required</span>
+        }
+        @if (getContact()?.errors?.['required'] && (getContact()?.touched || getContact()?.dirty)) {
+          <span class="requried">This field is requried to fill</span>
+        }
       </div>
     </div>
     <button>Register</button>
+    <button type="button" (click)="getDataFromAPI()">Fill Data</button>
   </form>
 </div>

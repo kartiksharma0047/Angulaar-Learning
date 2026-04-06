@@ -24,7 +24,7 @@ export class App implements OnInit {
       fname: ['', Validators.required],
       lname: [''],
       email: ['', [Validators.required, Validators.email]],
-      contact: [''],
+      contact: ['',[Validators.required,Validators.maxLength(10),Validators.minLength(10)]],
     });
   }
 
@@ -41,12 +41,18 @@ export class App implements OnInit {
     return this.userForm.get('contact');
   }
 
+  getDataFromAPI(){
+    this.userForm.patchValue({
+      fname: 'Kartik',
+      lname: 'Sharma',
+      email: 'kartik@gmail.com',
+      contact: '7850955109'
+    })
+  }
+
   onSubmit() {
     if (this.userForm.invalid) {
       this.userForm.markAllAsTouched();
-      console.log('Form Is InValid');
-      console.log(this.userForm);
-      console.log(this.getfname)
       return;
     }
 
