@@ -1,8 +1,5 @@
 <div class="container mt-4">
   <h3 class="mb-4">RXJS in Reactive Form</h3>
-
-  <input type="text" placeholder="Search" [formControl]="searchControl">
-
   <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
     <div class="row g-3">
       <!-- Name + Subscribe -->
@@ -45,13 +42,19 @@
 
       <!-- Confirm Password + Age + Driving License -->
       <div class="col-md-6">
-        <label class="form-label"> Confirm Password <span class="text-danger">*</span> </label>
+        <label class="form-label"> Confirm Password </label>
+        @if (getConfirmPassword()?.hasValidator(Validators.required)) {
+          <span class="text-danger ps-1">*</span>
+        }
         <input type="password" class="form-control" formControlName="confirmPassword" />
         @if (
           getConfirmPassword()?.errors?.['required'] &&
           (getConfirmPassword()?.touched || getConfirmPassword()?.dirty)
         ) {
-          <span class="requried">Please Enter Confirm Password</span>
+          <span class="requried">Please Confirm Your Password</span><br />
+        }
+        @if (userForm.errors?.['mismatch'] && getConfirmPassword()?.touched) {
+          <span class="requried">Password doesn't match</span>
         }
       </div>
 
