@@ -1,7 +1,7 @@
 import { Component, OnInit, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, ReactiveFormsModule, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule, FormGroup, Validators, FormControl } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -12,42 +12,54 @@ import { FormsModule } from '@angular/forms';
 })
 export class App implements OnInit {
   userForm!: FormGroup;
-  Validators = Validators;
+  Validators=Validators;
+  passwordMismatch: boolean = false;
+  searchResults: string[] = [];
   constructor(private fb: FormBuilder) {}
 
+  // Independent Form Control
+  searchControl:FormControl=new FormControl("");
+
   ngOnInit(): void {
-    console.log('Form is Online For submission');
     this.initializeForm();
+    this.getName()?.valueChanges.subscribe((res:string)=>{
+      console.log(res)
+    })
+
+    this.searchControl.valueChanges.subscribe((searchText)=>{
+      console.log("Entered text: ",searchText)
+    })
   }
+
   initializeForm() {
     this.userForm = this.fb.group({
-      fname: ['', Validators.required],
-      lname: [''],
+      name: ['', Validators.required],
+      subscribe: [false],
       email: ['', [Validators.required, Validators.email]],
-      contact: ['',[Validators.required,Validators.maxLength(10),Validators.minLength(10)]],
+      password: ['', Validators.required],
+      confirmPassword: ['', Validators.required],
+      age: [],
+      drivingLicense: [],
+      country: [],
+      currency: [],
+      search: [],
     });
   }
 
-  getfname() {
-    return this.userForm.get('fname');
-  }
-  getlname() {
-    return this.userForm.get('lname');
-  }
-  getEmail() {
-    return this.userForm.get('email');
-  }
-  getContact() {
-    return this.userForm.get('contact');
+  getName() {
+    return this.userForm.get('name');
   }
 
-  getDataFromAPI(){
-    this.userForm.patchValue({
-      fname: 'Kartik',
-      lname: 'Sharma',
-      email: 'kartik@gmail.com',
-      contact: '7850955109'
-    })
+  getEmail(){
+    return this.userForm.get('email')
+  }
+
+  getPassword(){
+    return this.userForm.get('password');
+  }
+
+  getConfirmPassword(){
+    return this.userForm.get('confirmPassword');
   }
 
   onSubmit() {
@@ -55,7 +67,5 @@ export class App implements OnInit {
       this.userForm.markAllAsTouched();
       return;
     }
-
-    console.log(this.userForm.value);
   }
 }
