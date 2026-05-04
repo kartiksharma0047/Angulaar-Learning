@@ -51,9 +51,9 @@
           getConfirmPassword()?.errors?.['required'] &&
           (getConfirmPassword()?.touched || getConfirmPassword()?.dirty)
         ) {
-          <span class="requried">Please Confirm Your Password</span><br />
+          <span class="requried">Please Enter To Confirm Password</span><br />
         }
-        @if (userForm.errors?.['mismatch'] && getConfirmPassword()?.touched) {
+        @else if (userForm.errors?.['mismatch'] && getConfirmPassword()?.touched) {
           <span class="requried">Password doesn't match</span>
         }
       </div>

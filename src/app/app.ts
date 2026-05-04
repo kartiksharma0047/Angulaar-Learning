@@ -9,6 +9,8 @@ import {
   FormControl,
 } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -26,7 +28,9 @@ export class App implements OnInit {
   ngOnInit(): void {
     this.initializeForm();
 
-    this.getPassword()?.valueChanges.subscribe((res: any) => {
+    this.getPassword()?.valueChanges.pipe(
+      takeUntilDestroyed()
+    ).subscribe((res: any) => {
       const confirm = this.getConfirmPassword();
 
       if (res) {
