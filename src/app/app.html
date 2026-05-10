@@ -43,7 +43,7 @@
       <!-- Confirm Password + Age + Driving License -->
       <div class="col-md-6">
         <label class="form-label"> Confirm Password </label>
-        @if (getConfirmPassword()?.hasValidator(Validators.required)) {
+        @if (getPassword()?.value) {
           <span class="text-danger ps-1">*</span>
         }
         <input type="password" class="form-control" formControlName="confirmPassword" />

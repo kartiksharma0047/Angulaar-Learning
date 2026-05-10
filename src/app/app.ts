@@ -28,21 +28,21 @@ export class App implements OnInit {
   ngOnInit(): void {
     this.initializeForm();
 
-    this.getPassword()?.valueChanges.pipe(
-      takeUntilDestroyed()
-    ).subscribe((res: any) => {
-      const confirm = this.getConfirmPassword();
+    this.getPassword()
+      ?.valueChanges.pipe(takeUntilDestroyed())
+      .subscribe((res: any) => {
+        const confirm = this.getConfirmPassword();
 
-      if (res) {
-        confirm?.setValidators([Validators.required]);
-        confirm?.enable();
-      } else {
-        confirm?.clearValidators();
-        confirm?.disable();
-      }
+        if (res) {
+          confirm?.setValidators([Validators.required]);
+          confirm?.enable();
+        } else {
+          confirm?.clearValidators();
+          confirm?.disable();
+        }
 
-      confirm?.updateValueAndValidity();
-    });
+        confirm?.updateValueAndValidity();
+      });
     this.getConfirmPassword()?.disable();
   }
 
@@ -68,9 +68,7 @@ export class App implements OnInit {
   passwordMatchValidator(form: FormGroup) {
     const password = form.get('password')?.value;
     const confirm = form.get('confirmPassword')?.value;
-
     if (!password) return null;
-
     return password === confirm ? null : { mismatch: true };
   }
 
