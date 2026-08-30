@@ -4,5 +4,6 @@ export const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home' },
   { path: 'home', loadComponent: () => import('./test2/test2').then((m) => m.Test2) },
   { path: 'form', loadComponent: () => import('./test/test').then((m) => m.Test) },
+  { path: 'signal-form', loadComponent: () => import('./signal-form/signal-form').then((m) => m.SignalForm) },
   { path: '**', redirectTo: 'home' },
 ];
