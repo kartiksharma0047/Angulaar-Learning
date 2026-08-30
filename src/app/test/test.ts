@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import {
   FormBuilder,
@@ -13,7 +12,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-test',
-  imports: [RouterLink, CommonModule, ReactiveFormsModule, FormsModule],
+  imports: [CommonModule, ReactiveFormsModule, FormsModule],
   templateUrl: './test.html',
   styleUrl: './test.css',
 })
