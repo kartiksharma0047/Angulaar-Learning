@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
 import {
   FormBuilder,
@@ -14,6 +14,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   selector: 'app-test',
   imports: [ReactiveFormsModule, FormsModule],
   templateUrl: './test.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './test.css',
 })
 export class Test implements OnInit {
