@@ -8,7 +8,6 @@ import {
   FormControl,
 } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-test',
@@ -28,8 +27,7 @@ export class Test implements OnInit {
     this.initializeForm();
 
     this.getPassword()
-      ?.valueChanges.pipe(takeUntilDestroyed())
-      .subscribe((res: any) => {
+      ?.valueChanges.subscribe((res: any) => {
         const confirm = this.getConfirmPassword();
 
         if (res) {
@@ -92,5 +90,6 @@ export class Test implements OnInit {
       this.userForm.markAllAsTouched();
       return;
     }
+    console.log(this.userForm.controls)
   }
 }
